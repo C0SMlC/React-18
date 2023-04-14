@@ -1,5 +1,5 @@
 // PASCAL CASING, CAPITAL FIRST LETTER
-
+import { MouseEvent } from 'react';
 import { Fragment } from 'react';
 // Can use fragment instead of <> </>
 function Message() {
@@ -11,11 +11,17 @@ function Message() {
     'Tokyo',
     'Sydeny',
   ];
-  items = [];
+  // items = [];
   // / Conditional rendering
   // if (items.length === 0) {
   //   return <h1>No item found</h1>;
   // }
+
+  // Parameter 'event' implicitly has an 'any' type.ts(7006)
+  // We have to explicitly specify the type of event
+  const handleClick = (event: MouseEvent) => {
+    console.log(event);
+  };
   const getMessage = () => {
     return items.length === 0 ? <p>No Item Found</p> : null;
   };
@@ -28,7 +34,7 @@ function Message() {
         {items.length === 0 && <p>No Item Found</p>}
 
         {items.map((item) => (
-          <li key={item} className="item">
+          <li key={item} className="item" onClick={handleClick}>
             {item}
           </li>
           // Eahc item should have unique in order to react to identufy the item
