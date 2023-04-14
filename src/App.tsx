@@ -1,11 +1,17 @@
 import Message from './message';
 
-function App() {
+// function App() {
+//   return (
+//     <div>
+//       <Message />
+//     </div>
+//   );
+// }
+
+function Greeting() {
   return (
-    <div>
-      <Message />
-    </div>
+    <> <Message /> </>
   );
 }
 
-export default App;
+export default Greeting;
