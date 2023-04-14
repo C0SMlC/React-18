@@ -3,7 +3,7 @@
 import { Fragment } from 'react';
 // Can use fragment instead of <> </>
 function Message() {
-  const items = [
+  let items = [
     'New York',
     'Delhi',
     'Mumbai',
@@ -11,11 +11,22 @@ function Message() {
     'Tokyo',
     'Sydeny',
   ];
+  items = [];
+  // / Conditional rendering
+  // if (items.length === 0) {
+  //   return <h1>No item found</h1>;
+  // }
+  const getMessage = () => {
+    return items.length === 0 ? <p>No Item Found</p> : null;
+  };
 
   return (
     <>
       <h1>The List of greeting message</h1>
       <ul className="unorderedList">
+        {getMessage()}
+        {items.length === 0 && <p>No Item Found</p>}
+
         {items.map((item) => (
           <li key={item} className="item">
             {item}
