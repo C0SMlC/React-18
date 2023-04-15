@@ -10,7 +10,10 @@ import Message from './message';
 
 function Greeting() {
   return (
-    <> <Message /> </>
+    <>
+      <Message />
+      <Message />
+    </>
   );
 }
 

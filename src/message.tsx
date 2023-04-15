@@ -1,6 +1,9 @@
 // PASCAL CASING, CAPITAL FIRST LETTER
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Fragment } from 'react';
+// import { useState } from 'react';
+
+// import bootstrap from 'bootstrap';
 // Can use fragment instead of <> </>
 function Message() {
   let items = [
@@ -11,6 +14,8 @@ function Message() {
     'Tokyo',
     'Sydeny',
   ];
+  // let selectedIndex = 0;
+  let [selectedIndex, updateIndex] = useState(-1);
   // items = [];
   // / Conditional rendering
   // if (items.length === 0) {
@@ -21,6 +26,7 @@ function Message() {
   // We have to explicitly specify the type of event
   const handleClick = (event: MouseEvent) => {
     console.log(event);
+    // console.log(arr);
   };
   const getMessage = () => {
     return items.length === 0 ? <p>No Item Found</p> : null;
@@ -28,13 +34,20 @@ function Message() {
 
   return (
     <>
-      <h1>The List of greeting message</h1>
-      <ul className="unorderedList">
+      <h1>The List of greeting message {selectedIndex}</h1>
+      <ul className="list-group">
         {getMessage()}
         {items.length === 0 && <p>No Item Found</p>}
 
-        {items.map((item) => (
-          <li key={item} className="item" onClick={handleClick}>
+        {items.map((item, index) => (
+          <li
+            key={item}
+            className={
+              selectedIndex === index ? 'list-group-item active' : 'item'
+            }
+            onClick={() => updateIndex(index)}
+            // onClick={() => (selectedIndex = index)}
+          >
             {item}
           </li>
           // Eahc item should have unique in order to react to identufy the item
