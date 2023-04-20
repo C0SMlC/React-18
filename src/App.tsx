@@ -9,10 +9,27 @@ import Message from './message';
 // }
 
 function Greeting() {
+  let items = [
+    'New York',
+    'Delhi',
+    'Mumbai',
+    'San Francisco',
+    'Tokyo',
+    'Sydeny',
+  ];
+
+  let Greeting = [
+    'Hi',
+    'Hello',
+    'Good Morning',
+    'Good Afternoon',
+    'Good Evening',
+  ];
+
   return (
     <>
-      <Message />
-      <Message />
+      <Message items={items} heading={'Cities'} />
+      <Message items={Greeting} heading="Greetings" />
     </>
   );
 }

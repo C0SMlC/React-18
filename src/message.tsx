@@ -5,15 +5,13 @@ import { Fragment } from 'react';
 
 // import bootstrap from 'bootstrap';
 // Can use fragment instead of <> </>
-function Message() {
-  let items = [
-    'New York',
-    'Delhi',
-    'Mumbai',
-    'San Francisco',
-    'Tokyo',
-    'Sydeny',
-  ];
+
+interface MessageProps {
+  items: string[];
+  heading: string;
+}
+
+function Message({ items, heading }: MessageProps) {
   // let selectedIndex = 0;
   let [selectedIndex, updateIndex] = useState(-1);
   // items = [];
@@ -34,7 +32,9 @@ function Message() {
 
   return (
     <>
-      <h1>The List of greeting message {selectedIndex}</h1>
+      <h1>
+        The List of {heading} {selectedIndex}
+      </h1>
       <ul className="list-group">
         {getMessage()}
         {items.length === 0 && <p>No Item Found</p>}
