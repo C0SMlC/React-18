@@ -28,8 +28,16 @@ function Greeting() {
 
   return (
     <>
-      <Message items={items} heading={'Cities'} />
-      <Message items={Greeting} heading="Greetings" />
+      <Message
+        items={items}
+        heading={'Cities'}
+        onSelectItem={(item) => console.log(item)}
+      />
+      <Message
+        items={Greeting}
+        heading="Greetings"
+        onSelectItem={(item) => console.log(item)}
+      />
     </>
   );
 }

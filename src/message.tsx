@@ -9,9 +9,10 @@ import { Fragment } from 'react';
 interface MessageProps {
   items: string[];
   heading: string;
+  onSelectItem: (item: string) => void;
 }
 
-function Message({ items, heading }: MessageProps) {
+function Message({ items, heading, onSelectItem }: MessageProps) {
   // let selectedIndex = 0;
   let [selectedIndex, updateIndex] = useState(-1);
   // items = [];
@@ -45,7 +46,10 @@ function Message({ items, heading }: MessageProps) {
             className={
               selectedIndex === index ? 'list-group-item active' : 'item'
             }
-            onClick={() => updateIndex(index)}
+            onClick={() => {
+              updateIndex(index);
+              onSelectItem(item);
+            }}
             // onClick={() => (selectedIndex = index)}
           >
             {item}
