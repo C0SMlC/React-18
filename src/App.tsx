@@ -1,45 +1,60 @@
-import Message from './message';
+// import Message from './message';
 
-// function App() {
+// // function App() {
+// //   return (
+// //     <div>
+// //       <Message />
+// //     </div>
+// //   );
+// // }
+
+// function Greeting() {
+//   let items = [
+//     'New York',
+//     'Delhi',
+//     'Mumbai',
+//     'San Francisco',
+//     'Tokyo',
+//     'Sydeny',
+//   ];
+
+//   let Greeting = [
+//     'Hi',
+//     'Hello',
+//     'Good Morning',
+//     'Good Afternoon',
+//     'Good Evening',
+//   ];
+
 //   return (
-//     <div>
-//       <Message />
-//     </div>
+//     <>
+//       <Message
+//         items={items}
+//         heading={'Cities'}
+//         onSelectItem={(item) => console.log(item)}
+//       />
+//       <Message
+//         items={Greeting}
+//         heading="Greetings"
+//         onSelectItem={(item) => console.log(item)}
+//       />
+//     </>
 //   );
 // }
 
-function Greeting() {
-  let items = [
-    'New York',
-    'Delhi',
-    'Mumbai',
-    'San Francisco',
-    'Tokyo',
-    'Sydeny',
-  ];
+// export default Greeting;
 
-  let Greeting = [
-    'Hi',
-    'Hello',
-    'Good Morning',
-    'Good Afternoon',
-    'Good Evening',
-  ];
+import React from 'react';
+import Alert from './alert';
 
+const App = () => {
   return (
-    <>
-      <Message
-        items={items}
-        heading={'Cities'}
-        onSelectItem={(item) => console.log(item)}
-      />
-      <Message
-        items={Greeting}
-        heading="Greetings"
-        onSelectItem={(item) => console.log(item)}
-      />
-    </>
+    <div>
+      <Alert>
+        <h1>Hello World </h1>
+      </Alert>
+    </div>
   );
-}
+};
 
-export default Greeting;
+export default App;
