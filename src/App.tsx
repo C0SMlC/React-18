@@ -70,7 +70,9 @@ import Button from './button';
 function App() {
   return (
     <div>
-      <Button onBtnClick={() => console.log('Clicked')}>primary</Button>
+      <Button color="danger" onBtnClick={() => console.log('Clicked')}>
+        Button
+      </Button>
     </div>
   );
 }
