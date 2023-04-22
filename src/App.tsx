@@ -44,17 +44,35 @@
 
 // export default Greeting;
 
-import React from 'react';
-import Alert from './alert';
+// import React from 'react';
+// import Alert from './alert';
 
-const App = () => {
+// const App = () => {
+// return (
+//   <div>
+//     <Alert>
+//       <h1>Hello World </h1>
+//     </Alert>
+//   </div>
+// );
+// };
+
+// export default App;
+
+import React from 'react';
+// Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Import Bootstrap JS
+import 'bootstrap/dist/js/bootstrap.min.js';
+
+import Button from './button';
+function App() {
   return (
     <div>
-      <Alert>
-        <h1>Hello World </h1>
-      </Alert>
+      <Button onBtnClick={() => console.log('Clicked')}>primary</Button>
     </div>
   );
-};
+}
 
 export default App;
