@@ -59,29 +59,42 @@
 
 // export default App;
 
-import React, { useState } from 'react';
-import DismissibleAlert from './dismissibleAlert';
-// import BtnClose from './btnClose';
-import Button from './button';
+// import React, { useState } from 'react';
+// import DismissibleAlert from './dismissibleAlert';
+// // import BtnClose from './btnClose';
+// import Button from './button';
 
-// // Import Bootstrap CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+// // // Import Bootstrap CSS
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.min.js';
+
+// const App = () => {
+//   const [alertVisible, alertManager] = useState(false);
+
+//   return (
+//     <div>
+//       {alertVisible && (
+//         <DismissibleAlert onClick={() => alertManager(false)}>
+//           Try again later...!!!
+//         </DismissibleAlert>
+//       )}
+
+//       <Button color="danger" onBtnClick={() => alertManager(true)}>
+//         Button
+//       </Button>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+import React from 'react';
+import List from './CSS-Modules/list';
 
 const App = () => {
-  const [alertVisible, alertManager] = useState(false);
-
   return (
     <div>
-      {alertVisible && (
-        <DismissibleAlert onClick={() => alertManager(false)}>
-          Try again later...!!!
-        </DismissibleAlert>
-      )}
-
-      <Button color="danger" onBtnClick={() => alertManager(true)}>
-        Button
-      </Button>
+      <List />
     </div>
   );
 };
