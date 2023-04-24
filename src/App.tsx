@@ -89,7 +89,7 @@
 // export default App;
 
 import React from 'react';
-import List from './CSS-Modules/list';
+import List from './CSS-in-JS/list';
 
 const App = () => {
   return (
