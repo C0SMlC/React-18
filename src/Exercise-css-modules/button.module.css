@@ -1,0 +1,13 @@
+.btn {
+  background-color: aquamarine;
+  padding: 2rem 4rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  width: 100%;
+  position: relative;
+}

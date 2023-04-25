@@ -1,0 +1,8 @@
+.like {
+  height: 30px;
+  width: 30px;
+  color: rgb(255, 2, 2); /* sets the color of the heart icon */
+  fill: rgb(0, 0, 0); /* sets the fill color of the heart icon */
+  font-size: 24px; /* sets the font size of the text in the h1 element */
+  color: rgb(84, 155, 78); /* sets the color of the text in the h1 element */
+}

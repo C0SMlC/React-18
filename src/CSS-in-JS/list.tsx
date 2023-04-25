@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { AiFillAlert } from 'react-icons/ai';
+
 
 const items = ['HIi', 'Hello', 'Gm', 'GN'];
 
@@ -30,6 +32,7 @@ const List = () => {
           onClick={() => updateIndex(index)}
           active={currentIndex === index}
         >
+          <AiFillAlert />
           {item}
         </ListItem>
       ))}

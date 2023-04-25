@@ -89,12 +89,13 @@
 // export default App;
 
 import React from 'react';
-import List from './CSS-in-JS/list';
+import { AiOutlineHeart } from 'react-icons/ai';
+import Like from './like-component/Like';
 
 const App = () => {
   return (
     <div>
-      <List />
+      <Like onClick={() => console.log('Button Clicked')} />
     </div>
   );
 };
