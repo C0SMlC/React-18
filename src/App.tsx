@@ -90,12 +90,12 @@
 
 import React from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
-import Like from './like-component/Like';
+import State from './States/states';
 
 const App = () => {
   return (
     <div>
-      <Like onClick={() => console.log('Button Clicked')} />
+      <State onClick={() => console.log('Clicked')} />
     </div>
   );
 };
