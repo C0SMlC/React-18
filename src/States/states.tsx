@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { produce } from 'immer';
 
 interface props {
   onClick: () => void;
@@ -15,12 +16,19 @@ const State = (props: props) => {
   });
 
   const handleClick = () => {
-    inCount({
-      ...count,
-      items: count.items.map((item) => {
-        return item.id === 1 ? { ...item, price: item.price - 10 } : item;
-      }),
-    });
+    //   inCount({
+    //     ...count,
+    //     items: count.items.map((item) => {
+    //       return item.id === 1 ? { ...item, price: item.price - 10 } : item;
+    //     }),
+    //   });
+    inCount(
+      produce((draft) => {
+        draft.items = draft.items.map((item) => {
+          return item.id === 1 ? { ...item, price: item.price - 10 } : item;
+        });
+      })
+    );
     props.onClick();
   };
 
