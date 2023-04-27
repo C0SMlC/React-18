@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import { produce } from 'immer';
+import styled from 'styled-components';
+
+const Clickbutton = styled.button`
+  background-color: #f06292;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: #e91e63;
+  }
+`;
 
 interface props {
   onClick: () => void;
 }
 const State = (props: props) => {
   //can achieve same thing by doing
-  const [count, inCount] = useState({
-    discount: 10,
-    items: [
-      { id: 1, title: 'Item 1', price: 100 },
-      { id: 2, title: 'Item 2', price: 200 },
-      { id: 3, title: 'Item 3', price: 300 },
-    ],
+  const [customer, setCustomer] = useState({
+    name: 'John',
+    address: {
+      city: 'New York',
+      state: 'NY',
+    },
   });
 
   const handleClick = () => {
@@ -22,19 +34,38 @@ const State = (props: props) => {
     //       return item.id === 1 ? { ...item, price: item.price - 10 } : item;
     //     }),
     //   });
-    inCount(
-      produce((draft) => {
-        draft.items = draft.items.map((item) => {
-          return item.id === 1 ? { ...item, price: item.price - 10 } : item;
-        });
-      })
-    );
+    // inCount(
+    //   produce((draft) => {
+    //     draft.items = draft.items.map((item) => {
+    //       return item.id === 1 ? { ...item, price: item.price - 10 } : item;
+    //     });
+    //   })
+    // );
+
+    // Modifies original object
+    // setCustomer(
+    //   produce((draft) => {
+    //     draft.address.state = 'LA';
+    //   })
+    // );
+
+    //copy
+    setCustomer({
+      ...customer,
+      address: {
+        ...customer.address,
+        state: 'LA',
+      },
+    });
     props.onClick();
   };
 
   return (
     <div>
-      <h1 onClick={handleClick}>{JSON.stringify(count)}</h1>
+      <h1>
+        Customer name {customer.name} And state is {customer.address.state}
+      </h1>
+      <Clickbutton onClick={handleClick}>Click Here</Clickbutton>
     </div>
   );
 };

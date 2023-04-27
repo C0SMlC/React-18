@@ -64,9 +64,9 @@
 // // import BtnClose from './btnClose';
 // import Button from './button';
 
-// // // Import Bootstrap CSS
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.min.js';
+// // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 // const App = () => {
 //   const [alertVisible, alertManager] = useState(false);
@@ -88,14 +88,30 @@
 
 // export default App;
 
-import React from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
-import State from './States/states';
+// import React from 'react';
+// import { AiOutlineHeart } from 'react-icons/ai';
+// import Message from './pure-components/message';
+
+// const App = () => {
+//   return (
+//     <div>
+//       <Message />
+//       <Message />
+//       <Message />
+//     </div>
+//   );
+// };
+
+// export default App;
+
+import React, { useState } from 'react';
+import Form from './Form/Form';
 
 const App = () => {
+  const [cartItem, setCartitem] = useState(['product1', 'product2']);
   return (
     <div>
-      <State onClick={() => console.log('Clicked')} />
+      <Form />
     </div>
   );
 };
