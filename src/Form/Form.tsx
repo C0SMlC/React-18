@@ -2,7 +2,7 @@ import React, { FormEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const Form = () => {
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const NameRef = useRef<HTMLInputElement>(null);
   const AgeRef = useRef<HTMLInputElement>(null);
