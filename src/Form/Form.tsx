@@ -24,7 +24,7 @@ const Form = () => {
     console.log(JSON.stringify(property));
   };
   return (
-    <form onSubmit={handleEvent}>
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
       <div className="mb-3">
         <label htmlFor="Name" className="form-label">
           Name
