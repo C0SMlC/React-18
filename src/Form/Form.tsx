@@ -1,8 +1,12 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
+interface fornData {
+  Name: string;
+  age: number;
+}
 const Form = () => {
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm<fornData>();
   // console.log(formState);
 
   // const NameRef = useRef<HTMLInputElement>(null);
@@ -85,7 +89,7 @@ const Form = () => {
         />
 
         {formState.errors.age?.type === 'required' && (
-          <p className="mt-1 text-danger">Minimum length for name is Three</p>
+          <p className="mt-1 text-danger">Age must be greater than 18</p>
         )}
       </div>
 
