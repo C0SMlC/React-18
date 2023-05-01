@@ -111,7 +111,11 @@ const Form = () => {
         )}
       </div>
 
-      <button type="submit" className="btn btn-primary">
+      <button
+        disabled={!formState.isValid}
+        type="submit"
+        className="btn btn-primary"
+      >
         Submit
       </button>
     </form>
