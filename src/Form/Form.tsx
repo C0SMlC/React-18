@@ -1,12 +1,31 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-interface fornData {
-  Name: string;
-  age: number;
-}
+const schema = z.object({
+  Name: z
+    .string()
+    .min(3, { message: 'Name must be at least 3 characters long' }),
+  age: z
+    .number({
+      invalid_type_error: '*Age is required',
+    })
+    .min(18, { message: 'Age must be at least 18' }),
+  // message: z.string(),
+});
+
+type formData = z.infer<typeof schema>;
+
+// interface fornData {
+//   Name: string;
+//   age: number;
+// }
+
 const Form = () => {
-  const { register, handleSubmit, formState } = useForm<fornData>();
+  const { register, handleSubmit, formState } = useForm<formData>({
+    resolver: zodResolver(schema),
+  });
   // console.log(formState);
 
   // const NameRef = useRef<HTMLInputElement>(null);
@@ -53,10 +72,7 @@ const Form = () => {
           //   }
           //   value={property.name}
           ///OXOXOXOXOX????
-          {...register('Name', {
-            required: true,
-            minLength: 3,
-          })}
+          {...register('Name')}
           ///OXOXOXOXOX????
 
           // ref={NameRef}
@@ -64,8 +80,8 @@ const Form = () => {
           type="text"
           className="form-control"
         />
-        {formState.errors.Name?.type === 'minLength' && (
-          <p className="mt-1 text-danger">Minimum length for name is Three</p>
+        {formState.errors.Name && (
+          <p className="mt-1 text-danger">{formState.errors.Name.message}</p>
         )}
       </div>
 
@@ -82,14 +98,16 @@ const Form = () => {
           // }
           // value={property.age}
           // ref={AgeRef}
-          {...register('age', { required: true })}
+          {...register('age', {
+            valueAsNumber: true,
+          })}
           id="age"
           type="number"
           className="form-control"
         />
 
-        {formState.errors.age?.type === 'required' && (
-          <p className="mt-1 text-danger">Age must be greater than 18</p>
+        {formState.errors.age && (
+          <p className="mt-1 text-danger">{formState.errors.age.message}</p>
         )}
       </div>
 
