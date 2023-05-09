@@ -65,8 +65,6 @@
 // import Button from './button';
 
 // // Import Bootstrap CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
 
 // const App = () => {
 //   const [alertVisible, alertManager] = useState(false);
@@ -105,13 +103,39 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 // export default App;
 
 import React, { useState } from 'react';
-import Form from './Form/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import ExpenseList from './expense-tracker/ExpenseList';
 
 const App = () => {
-  const [cartItem, setCartitem] = useState(['product1', 'product2']);
+  const [cartItem, setCartitem] = useState([
+    {
+      id: 1,
+      title: 'Bike',
+      amount: 100,
+      category: 'Food',
+    },
+    {
+      id: 2,
+      title: 'Food',
+      amount: 100,
+      category: 'Food',
+    },
+    {
+      id: 3,
+      title: 'Food',
+      amount: 100,
+      category: 'Food',
+    },
+  ]);
   return (
     <div>
-      <Form />
+      <ExpenseList
+        Expenses={cartItem}
+        onDelete={(id) =>
+          setCartitem(cartItem.filter((item) => item.id !== id))
+        }
+      />
     </div>
   );
 };
