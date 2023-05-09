@@ -106,6 +106,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import ExpenseList from './expense-tracker/ExpenseList';
+import ExpenseFilter from './expense-tracker/ExpenseFilter';
 
 const App = () => {
   const [cartItem, setCartitem] = useState([
@@ -127,11 +128,36 @@ const App = () => {
       amount: 100,
       category: 'Food',
     },
+    {
+      id: 4,
+      title: 'Entertainement',
+      amount: 100,
+      category: 'Entertainment',
+    },
+    {
+      id: 5,
+      title: 'Travel',
+      amount: 100,
+      category: 'Travel',
+    },
   ]);
+
+  const [selectedCategory, setSelectedCategory] = useState(' ');
+
+  let visibleItems = selectedCategory
+    ? cartItem.filter((e) => e.category === selectedCategory)
+    : cartItem;
+
+
   return (
     <div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategeory={(category) => setSelectedCategory(category)}
+        />
+      </div>
       <ExpenseList
-        Expenses={cartItem}
+        Expenses={visibleItems}
         onDelete={(id) =>
           setCartitem(cartItem.filter((item) => item.id !== id))
         }
