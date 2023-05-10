@@ -108,6 +108,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import ExpenseList from './expense-tracker/ExpenseList';
 import ExpenseFilter from './expense-tracker/ExpenseFilter';
 
+export const Categories = ['All', 'Groceries', 'Utility', 'Entertainment'];
+
 const App = () => {
   const [cartItem, setCartitem] = useState([
     {
@@ -148,7 +150,9 @@ const App = () => {
     ? cartItem.filter((e) => e.category === selectedCategory)
     : cartItem;
 
-
+  if (selectedCategory === 'All') {
+    visibleItems = cartItem;
+  }
   return (
     <div>
       <div className="mb-3">
