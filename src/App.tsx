@@ -107,6 +107,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import ExpenseList from './expense-tracker/ExpenseList';
 import ExpenseFilter from './expense-tracker/ExpenseFilter';
+import ExpenseForm from './expense-tracker/ExpenseForm';
 
 export const Categories = ['All', 'Groceries', 'Utility', 'Entertainment'];
 
@@ -155,6 +156,10 @@ const App = () => {
   }
   return (
     <div>
+      <div className="mb-3">
+        <ExpenseForm />
+      </div>
+
       <div className="mb-3">
         <ExpenseFilter
           onSelectCategeory={(category) => setSelectedCategory(category)}
