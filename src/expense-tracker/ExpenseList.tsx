@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Expense {
   id: number;
-  title: string;
+  description: string;
   amount: number;
   category: string;
 }
@@ -28,7 +28,7 @@ const ExpenseList = (props: Props) => {
       <tbody>
         {props.Expenses.map((expense) => (
           <tr key={expense.id}>
-            <td>{expense.title}</td>
+            <td>{expense.description}</td>
             <td>{expense.amount}</td>
             <td>{expense.category}</td>
             <td>

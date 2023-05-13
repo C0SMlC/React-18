@@ -110,54 +110,59 @@ import ExpenseList from './expense-tracker/ExpenseList';
 import ExpenseFilter from './expense-tracker/ExpenseFilter';
 import ExpenseForm from './expense-tracker/ExpenseForm';
 
-
 const App = () => {
   const [cartItem, setCartitem] = useState([
     {
       id: 1,
-      title: 'Bike',
+      description: 'Bike',
       amount: 100,
-      category: 'Food',
+      category: 'Groceries',
     },
     {
       id: 2,
-      title: 'Food',
+      description: 'Food',
       amount: 100,
-      category: 'Food',
+      category: 'Utility',
     },
     {
       id: 3,
-      title: 'Food',
+      description: 'Food',
       amount: 100,
-      category: 'Food',
+      category: 'Groceries',
     },
     {
       id: 4,
-      title: 'Entertainement',
+      description: 'Entertainement',
       amount: 100,
       category: 'Entertainment',
     },
     {
       id: 5,
-      title: 'Travel',
+      description: 'Travel',
       amount: 100,
-      category: 'Travel',
+      category: 'Utility',
     },
   ]);
 
-  const [selectedCategory, setSelectedCategory] = useState(' ');
-
-  let visibleItems = selectedCategory
-    ? cartItem.filter((e) => e.category === selectedCategory)
-    : cartItem;
+  const [selectedCategory, setSelectedCategory] = useState('');
+  let visibleItems = cartItem;
 
   if (selectedCategory === 'All') {
     visibleItems = cartItem;
+  } else {
+    visibleItems = selectedCategory
+      ? cartItem.filter((e) => e.category === selectedCategory)
+      : cartItem;
   }
+
   return (
     <div>
       <div className="mb-3">
-        <ExpenseForm />
+        <ExpenseForm
+          onSubmit={(data) =>
+            setCartitem([...cartItem, { ...data, id: data.amount * 10 }])
+          }
+        />
       </div>
 
       <div className="mb-3">
