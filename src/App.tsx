@@ -1,5 +1,7 @@
 // import Message from './message';
 
+import List from './CSS-Modules/list';
+
 // // function App() {
 // //   return (
 // //     <div>
@@ -102,80 +104,105 @@
 
 // export default App;
 
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-import { categories } from './expense-tracker/categories';
-import ExpenseList from './expense-tracker/ExpenseList';
-import ExpenseFilter from './expense-tracker/ExpenseFilter';
-import ExpenseForm from './expense-tracker/ExpenseForm';
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// Expense List
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+// import React, { useState } from 'react';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.min.js';
+// import { categories } from './expense-tracker/categories';
+// import ExpenseList from './expense-tracker/ExpenseList';
+// import ExpenseFilter from './expense-tracker/ExpenseFilter';
+// import ExpenseForm from './expense-tracker/ExpenseForm';
+
+// const App = () => {
+//   const [cartItem, setCartitem] = useState([
+//     {
+//       id: 1,
+//       description: 'Bike',
+//       amount: 100,
+//       category: 'Groceries',
+//     },
+//     {
+//       id: 2,
+//       description: 'Food',
+//       amount: 100,
+//       category: 'Utility',
+//     },
+//     {
+//       id: 3,
+//       description: 'Food',
+//       amount: 100,
+//       category: 'Groceries',
+//     },
+//     {
+//       id: 4,
+//       description: 'Entertainement',
+//       amount: 100,
+//       category: 'Entertainment',
+//     },
+//     {
+//       id: 5,
+//       description: 'Travel',
+//       amount: 100,
+//       category: 'tility',
+//     },
+//   ]);
+
+//   const [selectedCategory, setSelectedCategory] = useState('');
+//   let visibleItems = cartItem;
+
+//   if (selectedCategory === 'All') {
+//     visibleItems = cartItem;
+//   } else {
+//     visibleItems = selectedCategory
+//       ? cartItem.filter((e) => e.category === selectedCategory)
+//       : cartItem;
+//   }
+
+//   return (
+//     <div>
+//       <div className="mb-3">
+//         <ExpenseForm
+//           onSubmit={(data) =>
+//             setCartitem([...cartItem, { ...data, id: data.amount * 10 }])
+//           }
+//         />
+//       </div>
+
+//       <div className="mb-3">
+//         <ExpenseFilter
+//           onSelectCategeory={(category) => setSelectedCategory(category)}
+//         />
+//       </div>
+//       <ExpenseList
+//         Expenses={visibleItems}
+//         onDelete={(id) =>
+//           setCartitem(cartItem.filter((item) => item.id !== id))
+//         }
+//       />
+//     </div>
+//   );
+// };
+
+// export default App;
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// useForm
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+import React from 'react';
+import UseEffect from './useEffect/UseEffect';
 
 const App = () => {
-  const [cartItem, setCartitem] = useState([
-    {
-      id: 1,
-      description: 'Bike',
-      amount: 100,
-      category: 'Groceries',
-    },
-    {
-      id: 2,
-      description: 'Food',
-      amount: 100,
-      category: 'Utility',
-    },
-    {
-      id: 3,
-      description: 'Food',
-      amount: 100,
-      category: 'Groceries',
-    },
-    {
-      id: 4,
-      description: 'Entertainement',
-      amount: 100,
-      category: 'Entertainment',
-    },
-    {
-      id: 5,
-      description: 'Travel',
-      amount: 100,
-      category: 'Utility',
-    },
-  ]);
-
-  const [selectedCategory, setSelectedCategory] = useState('');
-  let visibleItems = cartItem;
-
-  if (selectedCategory === 'All') {
-    visibleItems = cartItem;
-  } else {
-    visibleItems = selectedCategory
-      ? cartItem.filter((e) => e.category === selectedCategory)
-      : cartItem;
-  }
-
   return (
     <div>
-      <div className="mb-3">
-        <ExpenseForm
-          onSubmit={(data) =>
-            setCartitem([...cartItem, { ...data, id: data.amount * 10 }])
-          }
-        />
-      </div>
-
-      <div className="mb-3">
-        <ExpenseFilter
-          onSelectCategeory={(category) => setSelectedCategory(category)}
-        />
-      </div>
-      <ExpenseList
-        Expenses={visibleItems}
-        onDelete={(id) =>
-          setCartitem(cartItem.filter((item) => item.id !== id))
-        }
-      />
+      <UseEffect />
     </div>
   );
 };
