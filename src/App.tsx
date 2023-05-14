@@ -217,7 +217,7 @@ import List from './CSS-Modules/list';
 /////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface type {
   id: number;
@@ -227,14 +227,25 @@ const App = () => {
   const [users, setUser] = useState<type[]>([]);
   const [error, setError] = useState('');
   useEffect(() => {
-    axios
-      .get<type[]>('https://jsonplaceholder.typicode.com/xusers')
-      .then((res) => {
+    // axios
+    //   .get<type[]>('https://jsonplaceholder.typicode.com/xusers')
+    //   .then((res) => {
+    //     setUser(res.data);
+    //   })
+    //   .catch((err) => {
+    //     setError(err.message);
+    //   });
+
+    const reqHandler = async () => {
+      try {
+        const res = await axios.get<type[]>(
+          'https://jsonplaceholder.typicode.com/xusers'
+        );
         setUser(res.data);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
+      } catch (err) {
+        setError((err as AxiosError).message);
+      }
+    };
   }, []);
   return (
     <div>
