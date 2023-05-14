@@ -227,9 +227,12 @@ interface type {
 const App = () => {
   const [users, setUser] = useState<type[]>([]);
   const [error, setError] = useState('');
+  const [isLoading, setLoader] = useState(false);
+
   useEffect(() => {
     //The AbortController is a built-in Web API that allows cancelling asynchronous operations.
-
+    // AbortController is a built-in JavaScript API that allows you to abort one or more web requests at once. When an AbortController is created, it generates an AbortSignal object which can be passed to a fetch() or XMLHttpRequest request as an option. If the AbortController.abort() method is called, it will signal the AbortSignal to abort the request. This can be useful for cancelling long-running or unnecessary requests to improve performance and user experience. In the code snippet you provided, the AbortController is used to create an AbortSignal object which is passed to the Axios request options as signal.
+    setLoader(true);
     const controller = new AbortController();
 
     axios
@@ -238,10 +241,12 @@ const App = () => {
       })
       .then((res) => {
         setUser(res.data);
+        setLoader(false);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoader(false);
       });
 
     // Using async and await
@@ -261,6 +266,7 @@ const App = () => {
   return (
     <div>
       {error && <p className="text-danger">{error}</p>}
+      {isLoading && <div className="spinner-border"></div>}
       {users.map((user) => (
         <li key={user.id}>{user.name}</li>
       ))}
