@@ -196,13 +196,48 @@ import List from './CSS-Modules/list';
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
-import React from 'react';
-import UseEffect from './useEffect/UseEffect';
+// import React from 'react';
+// import UseEffect from './useEffect/UseEffect';
+// import EffectCleanup from './useEffect/EffectCleanup';
 
+// const App = () => {
+//   return (
+//     <div>
+//       <EffectCleanup />
+//     </div>
+//   );
+// };
+
+// export default App;
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// FETCHING DATA
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface type {
+  id: number;
+  name: string;
+}
 const App = () => {
+  const [users, setUser] = useState<type[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<type[]>('https://jsonplaceholder.typicode.com/users')
+      .then((res) => {
+        setUser(res.data);
+      });
+  });
   return (
     <div>
-      <UseEffect />
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
     </div>
   );
 };
