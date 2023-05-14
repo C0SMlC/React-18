@@ -217,7 +217,8 @@ import List from './CSS-Modules/list';
 /////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, CanceledError } from 'axios';
+import { Controller } from 'react-hook-form';
 
 interface type {
   id: number;
@@ -227,25 +228,35 @@ const App = () => {
   const [users, setUser] = useState<type[]>([]);
   const [error, setError] = useState('');
   useEffect(() => {
-    // axios
-    //   .get<type[]>('https://jsonplaceholder.typicode.com/xusers')
-    //   .then((res) => {
-    //     setUser(res.data);
-    //   })
-    //   .catch((err) => {
-    //     setError(err.message);
-    //   });
+    //The AbortController is a built-in Web API that allows cancelling asynchronous operations.
 
-    const reqHandler = async () => {
-      try {
-        const res = await axios.get<type[]>(
-          'https://jsonplaceholder.typicode.com/xusers'
-        );
+    const controller = new AbortController();
+
+    axios
+      .get<type[]>('https://jsonplaceholder.typicode.com/users', {
+        signal: controller.signal,
+      })
+      .then((res) => {
         setUser(res.data);
-      } catch (err) {
-        setError((err as AxiosError).message);
-      }
-    };
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    // Using async and await
+    // const reqHandler = async () => {
+    //   try {
+    //     const res = await axios.get<type[]>(
+    //       'https://jsonplaceholder.typicode.com/users'
+    //     );
+    //     setUser(res.data);
+    //   } catch (err) {
+    //     setError((err as AxiosError).message);
+    //   }
+    // };
+    // reqHandler();
+    return () => controller.abort();
   }, []);
   return (
     <div>
