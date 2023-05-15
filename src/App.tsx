@@ -216,9 +216,10 @@ import List from './CSS-Modules/list';
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios, { AxiosError, CanceledError } from 'axios';
 import { Controller } from 'react-hook-form';
+import AddUserForm from './AddUserForm';
 
 interface type {
   id: number;
@@ -228,6 +229,7 @@ const App = () => {
   const [users, setUser] = useState<type[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setLoader] = useState(false);
+  const [formState, setFormState] = useState(false);
 
   useEffect(() => {
     //The AbortController is a built-in Web API that allows cancelling asynchronous operations.
@@ -275,10 +277,28 @@ const App = () => {
         setUser(originalUsers);
       });
   };
+
+  const addUserBtn = () => {
+    setFormState(true);
+  };
+
+  const addUser = (user: type) => {
+    // setUser([user, ...users]);s
+    axios
+      .post('https://jsonplaceholder.typicode.com/users', user)
+      .then((res) => {
+        setUser([res.data, ...users]);
+      });
+  };
+
   return (
     <div>
       {error && <p className="text-danger">{error}</p>}
       {isLoading && <div className="spinner-border"></div>}
+      <button className="btn btn-primary mb-3" onClick={() => addUserBtn()}>
+        Add User
+      </button>
+      {formState && <AddUserForm addUser={addUser} />}
       <ul className="list-group">
         {users.map((user) => (
           <li
