@@ -264,8 +264,17 @@ const App = () => {
     return () => controller.abort();
   }, []);
 
-  const deleteUser = (user: type) => {};
+  const deleteUser = (user: type) => {
+    const originalUsers = [...users];
+    setUser(users.filter((u) => u.id !== user.id));
 
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/users/${user.id}`)
+      .catch((err) => {
+        setError((err as AxiosError).message);
+        setUser(originalUsers);
+      });
+  };
   return (
     <div>
       {error && <p className="text-danger">{error}</p>}
