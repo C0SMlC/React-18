@@ -217,14 +217,11 @@ import List from './CSS-Modules/list';
 /////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useRef, useState } from 'react';
-import axios, { AxiosError, CanceledError } from 'axios';
-import { Controller } from 'react-hook-form';
+import apiClient, { CanceledError } from './service/api-client';
 import AddUserForm from './AddUserForm';
+import { AxiosError } from 'axios';
+import userService, { type } from './service/user-service';
 
-interface type {
-  id: number;
-  name: string;
-}
 const App = () => {
   const [users, setUser] = useState<type[]>([]);
   const [error, setError] = useState('');
@@ -236,12 +233,9 @@ const App = () => {
     //The AbortController is a built-in Web API that allows cancelling asynchronous operations.
     // AbortController is a built-in JavaScript API that allows you to abort one or more web requests at once. When an AbortController is created, it generates an AbortSignal object which can be passed to a fetch() or XMLHttpRequest request as an option. If the AbortController.abort() method is called, it will signal the AbortSignal to abort the request. This can be useful for cancelling long-running or unnecessary requests to improve performance and user experience. In the code snippet you provided, the AbortController is used to create an AbortSignal object which is passed to the Axios request options as signal.
     setLoader(true);
-    const controller = new AbortController();
 
-    axios
-      .get<type[]>('https://jsonplaceholder.typicode.com/users', {
-        signal: controller.signal,
-      })
+    const { request, cancel } = userService.getAllUsers();
+    request
       .then((res) => {
         setUser(res.data);
         setLoader(false);
@@ -264,14 +258,14 @@ const App = () => {
     //   }
     // };
     // reqHandler();
-    return () => controller.abort();
+    return () => cancel();
   }, []);
 
   const deleteUser = (user: type) => {
     const originalUsers = [...users];
     setUser(users.filter((u) => u.id !== user.id));
 
-    axios
+    apiClient
       .delete(`https://jsonplaceholder.typicode.com/users/${user.id}`)
       .catch((err) => {
         setError((err as AxiosError).message);
@@ -288,8 +282,8 @@ const App = () => {
     setFormState(false);
     setAddBtn(true);
     const originalUsers = [...users];
-    axios
-      .post('https://jsonplaceholder.typicode.com/users', user)
+    apiClient
+      .post('/users', user)
       .then((res) => {
         setUser([res.data, ...users]);
       })
@@ -304,15 +298,10 @@ const App = () => {
     const udatedUser = { ...user, name: user.name + ' updated' };
     setUser(users.map((u) => (u.id === user.id ? udatedUser : u)));
 
-    axios
-      .patch(
-        `https://jsonplaceholder.typicode.com/users/${user.id}`,
-        udatedUser
-      )
-      .catch((err) => {
-        setError((err as AxiosError).message);
-        setUser(originalUsers);
-      });
+    apiClient.patch(`/users/${user.id}`, udatedUser).catch((err) => {
+      setError((err as AxiosError).message);
+      setUser(originalUsers);
+    });
   };
 
   return (
