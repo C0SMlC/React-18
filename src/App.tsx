@@ -234,7 +234,7 @@ const App = () => {
     // AbortController is a built-in JavaScript API that allows you to abort one or more web requests at once. When an AbortController is created, it generates an AbortSignal object which can be passed to a fetch() or XMLHttpRequest request as an option. If the AbortController.abort() method is called, it will signal the AbortSignal to abort the request. This can be useful for cancelling long-running or unnecessary requests to improve performance and user experience. In the code snippet you provided, the AbortController is used to create an AbortSignal object which is passed to the Axios request options as signal.
     setLoader(true);
 
-    const { request, cancel } = userService.getAllUsers();
+    const { request, cancel } = userService.getAll<type>();
     request
       .then((res) => {
         setUser(res.data);
@@ -265,7 +265,7 @@ const App = () => {
     const originalUsers = [...users];
     setUser(users.filter((u) => u.id !== user.id));
 
-    userService.deleteUser(user.id).catch((err) => {
+    userService.delete(user.id).catch((err) => {
       setError((err as AxiosError).message);
       setUser(originalUsers);
     });
@@ -281,7 +281,7 @@ const App = () => {
     setAddBtn(true);
     const originalUsers = [...users];
     userService
-      .createUser(user)
+      .create(user)
       .then((res) => {
         setUser([res.data, ...users]);
       })
@@ -296,7 +296,7 @@ const App = () => {
     const udatedUser = { ...user, name: user.name + ' updated' };
     setUser(users.map((u) => (u.id === user.id ? udatedUser : u)));
 
-    userService.updateUser(udatedUser).catch((err) => {
+    userService.update(udatedUser).catch((err) => {
       setError((err as AxiosError).message);
       setUser(originalUsers);
     });
