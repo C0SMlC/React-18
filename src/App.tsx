@@ -217,7 +217,7 @@ import List from './CSS-Modules/list';
 /////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useRef, useState } from 'react';
-import apiClient, { CanceledError } from './service/api-client';
+import { CanceledError } from './service/api-client';
 import AddUserForm from './AddUserForm';
 import { AxiosError } from 'axios';
 import userService, { type } from './service/user-service';
@@ -258,19 +258,17 @@ const App = () => {
     //   }
     // };
     // reqHandler();
-    return () => cancel();
+    return cancel();
   }, []);
 
   const deleteUser = (user: type) => {
     const originalUsers = [...users];
     setUser(users.filter((u) => u.id !== user.id));
 
-    apiClient
-      .delete(`https://jsonplaceholder.typicode.com/users/${user.id}`)
-      .catch((err) => {
-        setError((err as AxiosError).message);
-        setUser(originalUsers);
-      });
+    userService.deleteUser(user.id).catch((err) => {
+      setError((err as AxiosError).message);
+      setUser(originalUsers);
+    });
   };
 
   const addUserBtn = () => {
@@ -282,8 +280,8 @@ const App = () => {
     setFormState(false);
     setAddBtn(true);
     const originalUsers = [...users];
-    apiClient
-      .post('/users', user)
+    userService
+      .createUser(user)
       .then((res) => {
         setUser([res.data, ...users]);
       })
@@ -298,7 +296,7 @@ const App = () => {
     const udatedUser = { ...user, name: user.name + ' updated' };
     setUser(users.map((u) => (u.id === user.id ? udatedUser : u)));
 
-    apiClient.patch(`/users/${user.id}`, udatedUser).catch((err) => {
+    userService.updateUser(udatedUser).catch((err) => {
       setError((err as AxiosError).message);
       setUser(originalUsers);
     });

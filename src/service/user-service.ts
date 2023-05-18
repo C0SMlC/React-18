@@ -18,6 +18,18 @@ class userService {
 
     return { request, cancel: () => controller.abort() };
   }
+
+  deleteUser(id: number) {
+    return apiClient.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+  }
+
+  createUser(user: type) {
+    return apiClient.post('/users', user);
+  }
+
+  updateUser(user: type) {
+    return apiClient.patch(`/users/${user.id}`, user);
+  }
 }
 
 export default new userService();
